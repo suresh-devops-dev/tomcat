@@ -1,0 +1,38 @@
+Jenkins-tomcat setup
+=====================
+1) Download Java
+
+yum install java-1.8*
+
+2) Install Jenkins
+You can install jenkins using the rpm or by setting up the repo. We will setup the repo so that we can update it easily in future. Get latest version of jenkins from https://pkg.jenkins.io/redhat-stable/
+
+yum -y install wget
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum -y install jenkins
+Start Jenkins
+# Start jenkins service
+systemctl start jenkins
+
+# Setup Jenkins to start at boot,
+systemctl enable jenkins
+Accessing Jenkins
+By default jenkins runs at port 8080, You can access jenkins at
+
+http://YOUR-SERVER-PUBLIC-IP:8080
+
+
+3) Add Maven, GIT in Global Tool Configuration 
+
+4) Download Deploy to container jenkins-plugins
+
+5) Create a maven project 
+choose goals
+clean installl package
+6) Post build action choose deploy on cotainer 
+add
+credenetials deployer:deployer in security-->
+
+Add Manager-script creds details in 
+Manage Jenkins--> Credentials --> System --> Global credentials (unrestricted)
