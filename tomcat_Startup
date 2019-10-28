@@ -1,0 +1,42 @@
+tomcat setup
+============
+1) Download Java
+
+yum install java-1.8*
+
+2) Download tomcat from source
+
+wget http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.47/bin/apache-tomcat-8.5.47.tar.gz
+
+3) Untar pakckage
+
+4) edit server.xml and tomcat-users for port and users
+
+  <role rolename="manager-gui"/>
+  <role rolename="manager-jmx"/>
+  <role rolename="manager-script"/>
+  <role rolename="manager-status"/>
+  <user username="admin" password="admin" roles="manager-gui, manager-jmx, manager-script, manager-status"/>
+  <user username="deployer" password="deployer" roles="manager-script"/>
+  <user username="tomcat" password="tomcat" roles="manager-gui"/>
+
+5) create links for startup shutdown
+
+ln -s /opt/apache-tomcat-8.5.47/bin/shutdown.sh /usr/bin/tomcatdown
+ln -s /opt/apache-tomcat-8.5.47/bin/startup.sh /usr/bin/tomcatup
+
+6) find . -name context.xml
+/opt/apache-tomcat-8.5.47/
+
+edit 
+
+[root@ip-172-31-41-62 apache-tomcat-8.5.47]# find . -name context.xml
+./conf/context.xml
+./webapps/host-manager/META-INF/context.xml
+./webapps/manager/META-INF/context.xml
+
+comment
+==========
+<Context antiResourceLocking="false" privileged="true" >
+<!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
